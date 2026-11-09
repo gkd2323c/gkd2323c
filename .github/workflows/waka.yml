@@ -10,32 +10,25 @@ permissions:
 
 jobs:
   update-readme:
-    name: Update Readme with Metrics
+    name: Update README with WakaTime stats
     runs-on: ubuntu-latest
     steps:
-      - name: Check WakaTime key
-        id: guard
-        env:
-          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-        run: |
-          if [ -z "$WAKATIME_API_KEY" ]; then
-            echo "WAKATIME_API_KEY is not configured, skipping update."
-            echo "ready=false" >> "$GITHUB_OUTPUT"
-          else
-            echo "ready=true" >> "$GITHUB_OUTPUT"
-          fi
-
       - name: Checkout
-        if: steps.guard.outputs.ready == 'true'
         uses: actions/checkout@v4
 
-      - name: Update README with WakaTime stats
-        if: steps.guard.outputs.ready == 'true'
-        uses: athul/waka-readme@master
-        with:
-          WAKATIME_API_KEY: ${{ secrets.WAKATIME_API_KEY }}
-          TIME_RANGE: last_7_days
-          LANG_COUNT: 5
-          SHOW_TOTAL: true
-          SHOW_TITLE: true
-          COMMIT_MESSAGE: "chore: update wakatime stats"
+      - name: Render WakaTime stats
+        env:
+          WAKATIME_USER_ID: 1fa18f0b-1bc6-41da-9b44-171a230e4ec3
+        run: python3 .github/scripts/wakatime_readme.py
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- README.md; then
+            echo "README.md unchanged"
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add README.md
+          git commit -m "chore: update wakatime stats"
+          git push
