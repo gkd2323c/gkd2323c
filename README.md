@@ -3,11 +3,11 @@
 [![wakatime](https://wakatime.com/badge/user/1fa18f0b-1bc6-41da-9b44-171a230e4ec3.svg)](https://wakatime.com/@1fa18f0b-1bc6-41da-9b44-171a230e4ec3)
 
 <!--START_SECTION:waka-->
-**All Time** · 92 hrs 4 mins total
+**All Time** · 100 hrs 35 mins total
 
 ```txt
-Other       56 hrs 58 mins ███████████████░░░░░░░░░  61.89 %
-JavaScript  34 hrs 59 mins █████████░░░░░░░░░░░░░░░  38.01 %
+Other       63 hrs 10 mins ███████████████░░░░░░░░░  62.81 %
+JavaScript  37 hrs 18 mins █████████░░░░░░░░░░░░░░░  37.10 %
 PowerShell  5 mins         ░░░░░░░░░░░░░░░░░░░░░░░░   0.10 %
 ```
 <!--END_SECTION:waka-->
